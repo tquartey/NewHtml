@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #f3efe5;
+            margin: 0;
+            padding: 0;
+            color: #292a26;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        nav{
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(41, 42, 38, .16);
+        }
+
+        .brand-link{
+            flex: 1;
+            color: rgb(67, 64, 64);
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        nav ul{
+            flex: 5;
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            margin: 0;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            align-items: center;
+        }
+        nav li {
+            flex:1;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav li:not(.a){
+            position: relative;
+            cursor: pointer;
+            transition: color .2s ease;
+        }
+
+        nav li:not(.a)::after{
+            position: absolute;
+            right: 25%;
+            bottom: -5px;
+            left: 25%;
+            height: 1px;
+            background: currentColor;
+            content: "";
+            transform: scaleX(0);
+            transition: transform .2s ease;
+        }
+
+        nav li:not(.a):hover{
+            color: #9d503d;
+        }
+
+        nav li:not(.a):hover::after{
+            transform: scaleX(1);
+        }
+
+        .menu-toggle{
+            display: none;
+        }
+
+        .hero{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tiles{
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .div1,.div2,.div3{
+          position: relative;
+          flex: 1;
+          min-width: 0;
+          min-height: 600px;
+          overflow: hidden;
+                    background-color: #77766d;
+                    animation: tile-enter .7s both;
+                }
+
+                .div2{
+                        animation-delay: .12s;
+                }
+
+                .div3{
+                        animation-delay: .24s;
+                }
+
+                .div1::after,.div2::after,.div3::after{
+                        position: absolute;
+                        inset: 35% 0 0;
+                        background: linear-gradient(transparent, rgba(20, 22, 20, .48));
+                        content: "";
+                        pointer-events: none;
+        }
+
+        .tile-image{
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+
+        .div1:hover .tile-image,
+        .div2:hover .tile-image,
+        .div3:hover .tile-image{
+            transform: scale(1.04);
+        }
+
+        .tile-label{
+            transition: transform .25s ease;
+        }
+
+        .div1:hover .tile-label,
+        .div2:hover .tile-label,
+        .div3:hover .tile-label{
+            transform: translateY(-5px);
+        }
+
+        .tile-label{
+            position: absolute;
+            z-index: 1;
+            right: 20px;
+            bottom: 22px;
+            left: 20px;
+            margin: 0;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 12px rgba(0, 0, 0, .55);
+        }
+
+        .TagLine{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 4px;
+            margin: 28px 12px 30px;
+            animation: tagline-enter .65s ease both;
+        }
+
+        .TagLine::before{
+            margin-bottom: 5px;
+            color: #9d503d;
+            content: "FUC 12  /  INDEPENDENT STREETWEAR";
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .TagLine p{
+            margin: 0;
+            color: #9d503d;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .TagLine h1{
+            margin: 0;
+            color: #292a26;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 58px;
+            font-weight: 500;
+            line-height: 1;
+            text-wrap: balance;
+        }
+
+        .div1{
+            background-color: rgb(82, 108, 100);
+        }
+        .div2{
+            background-color: rgb(107, 142, 130);
+        }
+        .div3{
+            background-color: rgb(139, 115, 85);
+        }
+
+        .site-footer{
+            margin-top: 72px;
+            padding: 50px max(24px, calc((100% - 1320px) / 2)) 22px;
+            background: #e8e3d8;
+            color: #292a26;
+        }
+
+        .footer-top{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(41, 42, 38, .2);
+        }
+
+        .footer-kicker,
+        .footer-column h3{
+            margin: 0 0 10px;
+            color: #d38a70;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .footer-top h2{
+            margin: 0;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(38px, 5vw, 64px);
+            font-weight: 500;
+            line-height: .95;
+        }
+
+        .back-to-top{
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 16px;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(41, 42, 38, .45);
+            color: #292a26;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color .2s ease, border-color .2s ease;
+        }
+
+        .back-to-top:hover,
+        .footer-links a:hover{
+            color: #9d503d;
+        }
+
+        .footer-grid{
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 28px;
+            padding: 30px 0 34px;
+        }
+
+        .footer-wordmark{
+            margin: 0 0 10px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        .footer-description{
+            max-width: 300px;
+            margin: 0;
+            color: rgba(41, 42, 38, .72);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .footer-column h3{
+            margin-bottom: 14px;
+            color: rgba(41, 42, 38, .58);
+        }
+
+        .footer-links{
+            display: grid;
+            justify-items: start;
+            gap: 10px;
+        }
+
+        .footer-links a{
+            color: #292a26;
+            font-size: 12px;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .footer-bottom{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(41, 42, 38, .2);
+            color: rgba(41, 42, 38, .62);
+            font-size: 10px;
+        }
+
+        .footer-bottom p{ margin: 0; }
+
+        @keyframes tagline-enter{
+            from{ opacity: 0; transform: translateY(12px); }
+            to{ opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes tile-enter{
+            from{ opacity: 0; transform: translateY(18px); }
+            to{ opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 650px){
+            nav{
+                position: relative;
+                justify-content: space-between;
+                min-height: 64px;
+                padding: 0 18px;
+            }
+            .brand-link{ flex: none; font-size: 26px; }
+            .menu-toggle{
+                display: inline-flex;
+                width: 44px;
+                height: 44px;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 5px;
+                border: 1px solid rgba(41, 42, 38, .25);
+                background: transparent;
+                cursor: pointer;
+            }
+            .menu-toggle span{
+                width: 18px;
+                height: 2px;
+                background: currentColor;
+                transition: transform .2s ease;
+            }
+            .menu-toggle[aria-expanded="true"] span:first-child{ transform: translateY(3.5px) rotate(45deg); }
+            .menu-toggle[aria-expanded="true"] span:last-child{ transform: translateY(-3.5px) rotate(-45deg); }
+            nav ul{
+                position: absolute;
+                z-index: 3;
+                top: 100%;
+                right: 0;
+                left: 0;
+                display: flex;
+                flex: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 0 18px;
+                background: #f3efe5;
+                border-bottom: 1px solid rgba(41, 42, 38, .16);
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(-8px);
+                transition: opacity .2s ease, transform .2s ease, visibility .2s;
+            }
+            nav.nav-open ul{
+                padding-top: 8px;
+                padding-bottom: 8px;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            nav ul li{
+                flex: none;
+                padding: 14px 4px;
+                text-align: left;
+            }
+            .TagLine{ margin-top: 24px; margin-bottom: 26px; }
+            .TagLine h1{ font-size: 34px; }
+            .tiles{ flex-direction: column; }
+            .div1,.div2,.div3{ min-height: 420px; }
+            .site-footer{ margin-top: 42px; padding: 38px 20px 18px; }
+            .footer-top{ align-items: flex-start; flex-direction: column; }
+            .footer-top h2{ font-size: 42px; }
+            .footer-grid{ grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+            .footer-brand{ grid-column: 1 / -1; }
+            .footer-bottom{ align-items: flex-start; flex-direction: column; gap: 7px; }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *,*::before,*::after{
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+
+
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a class="brand-link" href="#top">FUC 12</a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-menu">
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="main-menu">
+            <li class="b">Joggers</li>
+            <li class="c">Tops</li>
+            <li class="d">Head Wear</li>
+            <li class="e">Foot Wear</li>
+            <li class="f">Bag</li>
+        </ul>
+    </nav>
+
+    <div class="TagLine" id="top">
+        <h1>Fashion Unites Culture</h1>
+
+
+    </div>
+
+    <section class="hero">
+        <div class="tiles">
+            <div class="div1" id="new-arrivals">
+                <img class="tile-image" src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Model in a modern autumn outfit">
+                <h2 class="tile-label">New arrivals</h2>
+            </div>
+            <div class="div2" id="everyday-layers">
+                <img class="tile-image" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Contemporary streetwear styling">
+                <h2 class="tile-label">Everyday layers</h2>
+            </div>
+            <div class="div3" id="made-to-move">
+                <img class="tile-image" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Friends browsing a clothing collection">
+                <h2 class="tile-label">Made to move</h2>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div>
+                <p class="footer-kicker">FUC 12 / Independent streetwear</p>
+                <h2>Wear your point of view.</h2>
+            </div>
+            <a class="back-to-top" href="#top">Back to the top <span aria-hidden="true">↑</span></a>
+        </div>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <p class="footer-wordmark">FUC 12</p>
+                <p class="footer-description">Fashion unites culture. Built for everyday movement and your own way of seeing things.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <div class="footer-links">
+                    <a href="#new-arrivals">New arrivals</a>
+                    <a href="#everyday-layers">Everyday layers</a>
+                    <a href="#made-to-move">Made to move</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>The label</h3>
+                <div class="footer-links">
+                    <a href="#top">Fashion unites culture</a>
+                    <a href="#main-menu">Shop the collection</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 FUC 12. All rights reserved.</p>
+            <p>Independent streetwear. No rules, just vision.</p>
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('nav');
+
+        menuButton.addEventListener('click', () => {
+            const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', String(!isOpen));
+            menuButton.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+            navigation.classList.toggle('nav-open', !isOpen);
+        });
+
+        document.querySelectorAll('#main-menu li').forEach((link) => {
+            link.addEventListener('click', () => {
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.setAttribute('aria-label', 'Open navigation menu');
+                navigation.classList.remove('nav-open');
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.setAttribute('aria-label', 'Open navigation menu');
+                navigation.classList.remove('nav-open');
+            }
+        });
+    </script>
+</body>
+</html>
